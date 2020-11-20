@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#python3 ~/Desktop/pubmed_side_project/scraping_pubmed_updated_making_sure_this_works.py
+#python3 ~/Desktop/pubmed_side_project/scraping_pubmed_script_v11202020.py
 
 from bs4 import BeautifulSoup
 import requests
@@ -42,7 +42,6 @@ def ban_prevention(toc, tic, max_sec_per_request):
 
 def list_of_failed_API_qry(qry_type, failed_query, request_variable):
 	if request_variable.status_code != 200: #need to make a list documenting the queries that do not provide API requests
-		print('steven told you so')
 		failed_query = {'type of query': str(qry_type), 'query': str(failed_query)}
 		with open('/home/huy/Desktop/pubmed_side_project/failed_API_queries.csv', 'a') as csvfile:
 			fieldnames = list(failed_query.keys())
@@ -70,29 +69,27 @@ def make_request(url):
 Overview: this code has the following order: 
 	1) retrieve target IDs of interest
 	2) convert them to MeSH terms
-	3) query MeSH terms along with the "tauopathies" MeSH term into pubmed and get a CSV with the target name in one column and counts in the other
+	3) query MeSH terms along with the MeSH term of a disease of interest and a comparator disease into pubmed and get a CSV with the target name in one column and counts in the other
 '''
 
 '''
-Step 0. truncate the lists you're about to make
+Step 0. set the location you want all the files to go to
 '''
-with open('/home/huy/Desktop/pubmed_side_project/failed_API_queries_ecases_only.csv', 'w+') as csvfile:
-	fieldnames = ['type_of_query', 'query']
-	writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
-	writer.writeheader()
-	csvfile.close
+input_file_location = '/home/huy/Desktop/sample_input_file.csv'
+output_location_folder = '/home/huy/Desktop/mesh_data_trial/'
+disease_of_interest = 'tauopathies'
+comparator_disease_of_interest = 'diabetes mellitus, type 2'
+### disease of interest can be MeSh terms to utilize the MeSH hierarchy of pubmed 
 
-"""
+
 '''
 Step 1. create a list of ChEMBL target IDs (i.e. protgt_ID) that you eventually want to query into pubmed
 '''
-with open('/home/huy/Desktop/pubmed_side_project/FINAL_GFP-Tau Targets Results.csv', 'r') as csv_file:
-	protgt_ID = [row['target_ID'] for row in csv.DictReader(csv_file) if row['Organism'] == 'Homo sapiens']
+with open(input_file_location, 'r') as csv_file:
+	protgt_ID = [row['target_ID'] for row in csv.DictReader(csv_file)]
 	print(len(protgt_ID))
 
-# with open('/home/huy/Desktop/pubmed_side_project/edge_cases.json') as json_file:
-# 	reader = json.load(json_file)
-# 	protgt_ID = [item for item in reader.keys()]
+
 '''
 Step 2. convert the ChEMBL target IDs into MeSH terms
 '''
@@ -191,16 +188,15 @@ for iteration, ID in enumerate(protgt_ID):
 		print('')
 		toc = time.perf_counter()
 		ban_prevention(toc, tic, 2) #choose the more limiting of the rate limits. in this case, it's the chembl query at 1 request/sec comapred to meshbrowser's 8.33 requests/sec
-	with open('/home/huy/Desktop/pubmed_side_project/query_results/mesh_data_092420_' + str(iteration) + '.json', 'w+') as outfile:
+	with open(output_location_folder + 'total_mesh_data.json', 'w+') as outfile:
 		json.dump(mesh_data, outfile)
 		print('dumping into file: ' + str(iteration))
 		outfile.close()
-"""
+
 '''
 Step 3. run the protein target MeSH terms + the disease state MeSH term you're interested in
 '''
-### current code but may contain remnants that you don't need
-with open('/home/huy/Desktop/pubmed_side_project/query_results/mesh_data_092420_328.json') as jsonfile:
+with open(output_location_folder + 'total_mesh_data.json') as jsonfile:
 	reader = json.load(jsonfile)
 	print('length of mesh_data file is: ' + str(len(reader)))
 	# mesh_name = [value['mesh_term'] for value in reader.values() if 'mesh_term' in value.keys()]
@@ -213,21 +209,21 @@ with open('/home/huy/Desktop/pubmed_side_project/query_results/mesh_data_092420_
 	print('number of mesh names file is: ' + str(len(mesh_name)))
 	jsonfile.close()
 
-with open('/home/huy/Desktop/pubmed_side_project/edge_cases_092420.json', 'w+') as outfile:
+with open(output_location_folder + 'mesh_edge_cases.json', 'w+') as outfile:
 	json.dump(edge_cases, outfile)
 	outfile.close()
 
-with open('/home/huy/Desktop/pubmed_side_project/mesh_terms_092420.json', 'w+') as outfile:
+with open(output_location_folder + 'mesh_terms_to_be_queried.json', 'w+') as outfile:
 	json.dump(mesh_name, outfile)
 	outfile.close()
 
 total_results = []
 for num, (key, term) in enumerate(mesh_name.items()):
-	with open('/home/huy/Desktop/pubmed_side_project/query_results//pubmed_queries/query_results_' + datetime.now().strftime("%m_%d_%y_%H:%M") + '.csv', 'w') as new_file:
+	with open(output_location_folder +'query_results_' + datetime.now().strftime("%m_%d_%y_%H:%M") + '.csv', 'w') as new_file:
 		print('working on query ' + str(num + 1) + ' of ' + str(len(mesh_name)))
 		tic = time.perf_counter()
-		fieldnames = ['target_ID', 'mesh_term', 'number_of_results_tauopathies', 'number_of_results_T2DM']
-		total_results += [(str(key), str(term), pubmedqry(term, 'tauopathies'), pubmedqry(term, 'diabetes mellitus, type 2'))]
+		fieldnames = ['target_ID', 'mesh_term', 'number_of_results_' + disease_of_interest, 'number_of_results_' + comparator_disease_of_interest]
+		total_results += [(str(key), str(term), pubmedqry(term, disease_of_interest), pubmedqry(term, comparator_disease_of_interest))]
 		csv_writer = csv.writer(new_file)
 		csv_writer.writerow(fieldnames)
 		csv_writer.writerows(total_results)
