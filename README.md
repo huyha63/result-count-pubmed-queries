@@ -1,10 +1,12 @@
 **What to do before starting** 
 
-1) a shebang is used to run the file. If you prefer not to use the shebang, please delete lines 1 and 2. Otherwise, change the filepath of the .py file to run the shebang
-2) specify the input data file path in line 79 as a string
-3) specify the output location folder in line 80 as a string
-4) specify the disease of interest in line 81 as a string
-5) specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
+1) Input the chEMBL-IDs to be queried into the sample_input_file.csv located in the input_data folder of the result-count-pubmed-queries directory
+2) specify the disease of interest in line 81 as a string
+3) specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
+
+**How to run**
+
+1) go to result-count-pubmed-queries directory and run in the terminal: python3 scraping_pubmed_script.py
 
 **Exact format of input data**
 
