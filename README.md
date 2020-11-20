@@ -1,12 +1,12 @@
 **What to do before starting** 
 
 1) Input the chEMBL-IDs to be queried into the sample_input_file.csv located in the input_data folder of the result-count-pubmed-queries directory
-2) specify the disease of interest in line 81 as a string
-3) specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
+2) Specify the disease of interest in line 81 as a string
+3) Specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
 
 **How to run**
 
-1) go to result-count-pubmed-queries directory and run in the terminal: python3 scraping_pubmed_script.py
+1) Go to result-count-pubmed-queries directory and run in the terminal: python3 scraping_pubmed_script.py
 
 **Exact format of input data**
 
@@ -30,17 +30,17 @@
 
 4) .json file called mesh_terms_to_be_queried.json of the target IDs with only 1 MeSH term associated with them that can be queried
 
-**What are the required packages needed to run this?**
+**Requirements**
 
 python = 3.8.2
 beautiful soup = 4.8.2
 
-**What is the estimated run time?**
+**Estimated run time**
 
-for about 300 chEMBL target IDs, 3-4 hours
+With personal PC, estimated run time for about 300 chEMBL target IDs was 3-4 hours.
 
 **What still needs to be done?**
 
-1. Using Icite, an article evaluator made by pubmed, determine the best article to be read to get more insight on how well associated the chembl ID is with tauopathies. Also, separate from articles published w/in last 1-2 yrs (perhaps focus on Review category?)
-2. Resolve edge cases resulting from the SPARQL queries.
-3. Current script has been written not been written concisely. It also includes specific links to my computer that should somehow be modified to allow anyone to use it (ex. Line 47 includes a file path to a specific folder I wanted a csv to be written to).
+1. Using Icite, an article evaluator made by pubmed, determine the best article to be read to get more insight on how well associated the chembl ID is with tauopathies. Also, separate from articles published w/in last 1-2 yrs (perhaps focus on Review category)
+2. Resolve edge cases resulting from the SPARQL queries
+3. Current script has not been written concisely
