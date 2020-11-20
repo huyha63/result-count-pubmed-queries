@@ -1,10 +1,10 @@
 **What to do before starting** 
 
-0) a shebang is used to run the file. If you prefer not to use the shebang, please delete lines 1 and 2. Otherwise, change the filepath of the .py file to run the shebang
-1) specify the input data file path in line 79 as a string
-2) specify the output location folder in line 80 as a string
-3) specify the disease of interest in line 81 as a string
-4) specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
+1) a shebang is used to run the file. If you prefer not to use the shebang, please delete lines 1 and 2. Otherwise, change the filepath of the .py file to run the shebang
+2) specify the input data file path in line 79 as a string
+3) specify the output location folder in line 80 as a string
+4) specify the disease of interest in line 81 as a string
+5) specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
 
 **Exact format of input data**
 
