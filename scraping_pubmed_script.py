@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#python3 ~/Desktop/pubmed_side_project/scraping_pubmed_script_v11202020.py
+#python3 scraping_pubmed_script.py
 
 from bs4 import BeautifulSoup
 import requests
@@ -75,8 +75,8 @@ Overview: this code has the following order:
 '''
 Step 0. set the location you want all the files to go to
 '''
-input_file_location = '/home/huy/Desktop/sample_input_file.csv'
-output_location_folder = '/home/huy/Desktop/mesh_data_trial/'
+input_file_location = 'input/sample_input_file.csv'
+output_location_folder = 'output/'
 disease_of_interest = 'tauopathies'
 comparator_disease_of_interest = 'diabetes mellitus, type 2'
 ### disease of interest can be MeSh terms to utilize the MeSH hierarchy of pubmed 
