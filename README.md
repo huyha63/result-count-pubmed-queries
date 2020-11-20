@@ -1,20 +1,17 @@
-============================================
-What to do before starting 
-============================================
+**What to do before starting** 
+
 0) a shebang is used to run the file. If you prefer not to use the shebang, please delete lines 1 and 2. Otherwise, change the filepath of the .py file to run the shebang
 1) specify the input data file path in line 79 as a string
 2) specify the output location folder in line 80 as a string
 3) specify the disease of interest in line 81 as a string
 4) specify the disease that will be used as a comparator to the disease of interest in line 82 as a string
 
-============================================
-Exact format of input data
-============================================
+**Exact format of input data**
+
 1) .csv file with column name: target_ID and the chEMBL target IDs of interest. A sample input file named: sample_input_file.csv has been uploaded for reference
 
-============================================
-What is the output format that’s expected? One file? Multiple files?
-============================================
+**What is the output format that’s expected? One file? Multiple files?**
+
 1) .csv file called query_results_[date and time of the time the script was used].csv with the following column names and descriptions
     - 'target_ID' (target ID queried into the script)
     - 'mesh_term' (mesh term associated with the target ID)
@@ -31,22 +28,17 @@ What is the output format that’s expected? One file? Multiple files?
 
 4) .json file called mesh_terms_to_be_queried.json of the target IDs with only 1 MeSH term associated with them that can be queried
 
-============================================
-What are the required packages needed to run this? (python=3.x, beautiful soup, etc)
-============================================
+**What are the required packages needed to run this? (python=3.x, beautiful soup, etc)**
+
 python = 3.8.2
 beautiful soup = 4.8.2
 
-============================================
-What is the estimated run time
-============================================
+**What is the estimated run time**
+
 for about 300 chEMBL target IDs, 3-4 hours
 
+**What still needs to be done**
 
-============================================
-what still needs to be done
-============================================
 1. Using Icite, an article evaluator made by pubmed, determine the best article to be read to get more insight on how well associated the chembl ID is with tauopathies. Also, separate from articles published w/in last 1-2 yrs (perhaps focus on Review category?)
 2. Resolve edge cases resulting from the SPARQL queries.
 3. Current script has been written not been written concisely. It also includes specific links to my computer that should somehow be modified to allow anyone to use it (ex. Line 47 includes a file path to a specific folder I wanted a csv to be written to).
-
