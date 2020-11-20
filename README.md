@@ -10,7 +10,7 @@
 
 1) .csv file with column name: target_ID and the chEMBL target IDs of interest. A sample input file named: sample_input_file.csv has been uploaded for reference
 
-**What is the output format that’s expected? One file? Multiple files?**
+**What is the output format that’s expected?**
 
 1) .csv file called query_results_[date and time of the time the script was used].csv with the following column names and descriptions
     - 'target_ID' (target ID queried into the script)
