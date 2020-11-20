@@ -75,8 +75,8 @@ Overview: this code has the following order:
 '''
 Step 0. set the location you want all the files to go to
 '''
-input_file_location = 'input/sample_input_file.csv'
-output_location_folder = 'output/'
+input_file_location = 'input_data/sample_input_file.csv'
+output_location_folder = 'output_data/'
 disease_of_interest = 'tauopathies'
 comparator_disease_of_interest = 'diabetes mellitus, type 2'
 ### disease of interest can be MeSh terms to utilize the MeSH hierarchy of pubmed 
