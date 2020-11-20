@@ -28,16 +28,16 @@
 
 4) .json file called mesh_terms_to_be_queried.json of the target IDs with only 1 MeSH term associated with them that can be queried
 
-**What are the required packages needed to run this? (python=3.x, beautiful soup, etc)**
+**What are the required packages needed to run this?**
 
 python = 3.8.2
 beautiful soup = 4.8.2
 
-**What is the estimated run time**
+**What is the estimated run time?**
 
 for about 300 chEMBL target IDs, 3-4 hours
 
-**What still needs to be done**
+**What still needs to be done?**
 
 1. Using Icite, an article evaluator made by pubmed, determine the best article to be read to get more insight on how well associated the chembl ID is with tauopathies. Also, separate from articles published w/in last 1-2 yrs (perhaps focus on Review category?)
 2. Resolve edge cases resulting from the SPARQL queries.
